@@ -7,7 +7,7 @@ interface NewsRepository {
 
     fun fetchHeadlines(query: NewsQuery): Single<NewsResponse>
 
-    fun fetchLatestByQuery(query: String, from: String = "", to: String): Single<NewsResponse>
+    fun fetchEverything(query: NewsQuery): Single<NewsResponse>
 
     interface NewsQuery
 }

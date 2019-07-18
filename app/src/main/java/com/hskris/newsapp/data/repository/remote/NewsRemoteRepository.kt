@@ -7,12 +7,11 @@ import io.reactivex.Single
 
 class NewsRemoteRepository(private val api: ApiService) : NewsRepository {
     override fun fetchHeadlines(query: NewsRepository.NewsQuery): Single<NewsResponse> {
-        query as NewsRemoteQuery
-        return api.getHeadline(query.options)
+        return api.getHeadline((query as NewsRemoteQuery).options)
     }
 
-    override fun fetchLatestByQuery(query: String, from: String, to: String): Single<NewsResponse> {
-        return api.getEverything(query, from, to)
+    override fun fetchEverything(query: NewsRepository.NewsQuery): Single<NewsResponse> {
+        return api.getEverything((query as NewsRemoteQuery).options)
     }
 
     class NewsRemoteQuery : NewsRepository.NewsQuery {

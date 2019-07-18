@@ -15,8 +15,6 @@ interface ApiService {
 
     @GET("everything?language=en&apiKey=" + Api.API_KEY)
     fun getEverything(
-        @Query("q") keyword: String,
-        @Query("from") from: String = "",
-        @Query("to") to: String = ""
+        @QueryMap options: Map<String, String>
     ): Single<NewsResponse>
 }

@@ -22,6 +22,14 @@ class NewsRemoteRepositoryTest : Spek({
                 verify(api).getHeadline(newsQuery.options)
             }
         }
+
+        on("calling fetch everything"){
+            repo.fetchEverything(newsQuery)
+
+            it("should call fetch headline on api service") {
+                verify(api).getEverything(newsQuery.options)
+            }
+        }
     }
 
     given("news remote repository news query"){
