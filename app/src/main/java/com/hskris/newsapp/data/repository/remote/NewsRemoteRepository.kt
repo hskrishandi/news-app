@@ -8,7 +8,7 @@ import io.reactivex.Single
 class NewsRemoteRepository(private val api: ApiService) : NewsRepository {
     override fun fetchHeadlines(query: NewsRepository.NewsQuery): Single<NewsResponse> {
         query as NewsRemoteQuery
-        return api.getHeadline(query.keyword, query.category, query.country)
+        return api.getHeadline(query.options)
     }
 
     override fun fetchLatestByQuery(query: String, from: String, to: String): Single<NewsResponse> {
@@ -16,11 +16,14 @@ class NewsRemoteRepository(private val api: ApiService) : NewsRepository {
     }
 
     class NewsRemoteQuery : NewsRepository.NewsQuery {
-        var keyword = ""
-        var category = ""
-        var country = "id"
-        var from = ""
-        var to = ""
-        var language ="en"
+        val options = hashMapOf<String, String>()
+
+        fun add(key: String, value: String){
+            options[key] = value
+        }
+
+        fun add(map: HashMap<String, String>){
+            options.putAll(map)
+        }
     }
 }

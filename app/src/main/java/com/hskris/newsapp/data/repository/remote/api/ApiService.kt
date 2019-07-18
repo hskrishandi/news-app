@@ -4,14 +4,13 @@ import com.hskris.newsapp.data.repository.remote.models.NewsResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiService {
 
     @GET("top-headlines?apiKey=" + Api.API_KEY)
     fun getHeadline(
-        @Query("q") keyword: String = "",
-        @Query("category") category: String = "",
-        @Query("country") country: String = "id"
+        @QueryMap options: Map<String, String>
     ): Single<NewsResponse>
 
     @GET("everything?language=en&apiKey=" + Api.API_KEY)
