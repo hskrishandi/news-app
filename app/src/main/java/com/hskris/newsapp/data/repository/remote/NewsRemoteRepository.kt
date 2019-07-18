@@ -9,4 +9,8 @@ class NewsRemoteRepository(private val api: ApiService) : NewsRepository {
     override fun fetchHeadline(query: String): Single<NewsResponse> {
         return api.getHeadline(query)
     }
+
+    override fun fetchByCategory(category: String): Single<NewsResponse> {
+        return api.getHeadline(category = category)
+    }
 }

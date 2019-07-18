@@ -20,5 +20,13 @@ class NewsRemoteRepositoryTest : Spek({
                 verify(api).getHeadline("")
             }
         }
+
+        on("calling fetch by category"){
+            repo.fetchByCategory("general")
+
+            it("should call fetch headline with category on api service"){
+                verify(api).getHeadline(category = "general")
+            }
+        }
     }
 })

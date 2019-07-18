@@ -5,4 +5,6 @@ import io.reactivex.Single
 
 interface NewsRepository {
     fun fetchHeadline(query: String = ""): Single<NewsResponse>
+
+    fun fetchByCategory(category: String): Single<NewsResponse>
 }
