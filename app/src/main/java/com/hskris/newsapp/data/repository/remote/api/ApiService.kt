@@ -12,5 +12,12 @@ interface ApiService {
         @Query("q") query: String = "",
         @Query("category") category: String = "",
         @Query("country") country: String = "id"
-        ): Single<NewsResponse>
+    ): Single<NewsResponse>
+
+    @GET("everything?language=en&apiKey=" + Api.API_KEY)
+    fun getEverything(
+        @Query("q") query: String,
+        @Query("from") from: String = "",
+        @Query("to") to: String = ""
+    ): Single<NewsResponse>
 }
