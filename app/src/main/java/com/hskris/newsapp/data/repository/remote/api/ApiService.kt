@@ -9,14 +9,14 @@ interface ApiService {
 
     @GET("top-headlines?apiKey=" + Api.API_KEY)
     fun getHeadline(
-        @Query("q") query: String = "",
+        @Query("q") keyword: String = "",
         @Query("category") category: String = "",
         @Query("country") country: String = "id"
     ): Single<NewsResponse>
 
     @GET("everything?language=en&apiKey=" + Api.API_KEY)
     fun getEverything(
-        @Query("q") query: String,
+        @Query("q") keyword: String,
         @Query("from") from: String = "",
         @Query("to") to: String = ""
     ): Single<NewsResponse>

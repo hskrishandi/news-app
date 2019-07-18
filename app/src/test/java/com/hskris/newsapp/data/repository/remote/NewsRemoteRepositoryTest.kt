@@ -1,5 +1,6 @@
 package com.hskris.newsapp.data.repository.remote
 
+import com.hskris.newsapp.data.repository.NewsRepository
 import com.hskris.newsapp.data.repository.remote.api.ApiService
 import com.nhaarman.mockitokotlin2.*
 import org.jetbrains.spek.api.Spek
@@ -12,20 +13,13 @@ class NewsRemoteRepositoryTest : Spek({
     given("NewsRepository") {
         val api : ApiService = mock()
         val repo = NewsRemoteRepository(api)
+        val newsQuery = NewsRemoteRepository.NewsRemoteQuery()
 
         on("calling fetch headline") {
-            repo.fetchHeadline("")
+            repo.fetchHeadlines(newsQuery)
 
             it("should call fetch headline on api service") {
-                verify(api).getHeadline("")
-            }
-        }
-
-        on("calling fetch by category"){
-            repo.fetchByCategory("general")
-
-            it("should call fetch headline with category on api service"){
-                verify(api).getHeadline(category = "general")
+                verify(api).getHeadline(newsQuery.keyword, newsQuery.category, newsQuery.country)
             }
         }
     }
