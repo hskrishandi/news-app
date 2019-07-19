@@ -1,6 +1,8 @@
 package com.hskris.newsapp.domain.models
 
 import com.hskris.newsapp.data.repository.remote.models.NewsResponse
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Date
 
 class News (
@@ -18,7 +20,9 @@ class News (
             val newsArray = arrayListOf<News>()
 
             for(a in articles){
-                val news = News(a.title, a.author, Date(a.publishedAt), a.description, a.content, a.urlToImage)
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val date = formatter.parse(a.publishedAt)
+                val news = News(a.title, a.author, date!!, a.description, a.content, a.urlToImage)
                 newsArray.add(news)
             }
 
