@@ -12,7 +12,6 @@ import org.koin.android.ext.android.inject
 class NewsActivity : AppCompatActivity() {
 
     private val viewModel: NewsViewModel by inject()
-    private val newsCardAdapter = NewsCardAdapter(emptyList())
     private val carousellAdapter = NewsCarousellAdapter(emptyList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,22 +21,13 @@ class NewsActivity : AppCompatActivity() {
         rvLatestNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvLatestNews.adapter = carousellAdapter
 
-        rvHeadlines.layoutManager = LinearLayoutManager(this)
-        rvHeadlines.adapter = newsCardAdapter
-
-        val newsObserver = Observer<List<News>>{
-            newsCardAdapter.updateNews(it)
-        }
-
         val carousellObserver = Observer<List<News>>{
             carousellAdapter.updateNews(it)
         }
 
-        viewModel.news.observe(this, newsObserver)
         viewModel.carousell.observe(this, carousellObserver)
-
         viewModel.getCarousell()
-        viewModel.getNews("general")
 
+        viewPagerNews.adapter = CategoryPagerAdapter(supportFragmentManager)
     }
 }
