@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.hskris.newsapp.R
 import com.hskris.newsapp.domain.models.News
 import kotlinx.android.synthetic.main.activity_news.*
@@ -29,5 +30,7 @@ class NewsActivity : AppCompatActivity() {
         viewModel.getCarousell()
 
         viewPagerNews.adapter = CategoryPagerAdapter(supportFragmentManager)
+        tabsNews.setupWithViewPager(viewPagerNews)
+        tabsNews.tabMode = TabLayout.MODE_SCROLLABLE
     }
 }

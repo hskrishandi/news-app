@@ -7,6 +7,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 class CategoryPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
     companion object {
         private const val CATEGORY_GENERAL = "general"
+        private const val CATEGORY_BUSINESS = "business"
+        private const val CATEGORY_HEALTH = "health"
+        private const val CATEGORY_SCIENCE = "science"
+        private const val CATEGORY_SPORTS = "sports"
         private const val CATEGORY_ENTERTAINMENT = "entertainment"
         private const val CATEGORY_TECHNOLOGY = "technology"
     }
@@ -14,7 +18,12 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdap
     private val pages = listOf(
         CategoryFragment(CATEGORY_GENERAL),
         CategoryFragment(CATEGORY_ENTERTAINMENT),
-        CategoryFragment(CATEGORY_TECHNOLOGY)
+        CategoryFragment(CATEGORY_BUSINESS),
+        CategoryFragment(CATEGORY_SCIENCE),
+        CategoryFragment(CATEGORY_TECHNOLOGY),
+        CategoryFragment(CATEGORY_SPORTS),
+        CategoryFragment(CATEGORY_HEALTH)
+
     )
 
     override fun getItem(position: Int): Fragment {
@@ -23,5 +32,9 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdap
 
     override fun getCount(): Int {
         return pages.size
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return pages[position].category
     }
 }

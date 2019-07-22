@@ -14,7 +14,7 @@ import com.hskris.newsapp.domain.models.News
 import kotlinx.android.synthetic.main.fragment_category.*
 import org.koin.android.ext.android.inject
 
-class CategoryFragment(private val category: String) : Fragment() {
+class CategoryFragment(val category: String) : Fragment() {
 
     private val viewModel: NewsViewModel by inject()
     private val newsCardAdapter = NewsCardAdapter(emptyList())
