@@ -15,15 +15,27 @@ class NewsViewModel(
 
     private val disposables = CompositeDisposable()
 
+    val carousell by lazy {
+        MutableLiveData<List<News>>()
+    }
+
     val news by lazy {
         MutableLiveData<List<News>>()
     }
 
     val interests = "football"
 
-    fun getFrontNews(){
-        val subscription = getEverythingUseCase.getByKeywords(interests).subscribe({
+    fun getNews(category: String){
+        val subscription = getHeadlineUseCase.getByCategory(category).subscribe({
             news.value = it
+        }, {
+            Log.d("NewsViewModel", "Error: $it")
+        })
+    }
+
+    fun getCarousell(){
+        val subscription = getEverythingUseCase.getByKeywords(interests).subscribe({
+            carousell.value = it
             Log.d("NewsViewModel", it.toString())
         },{
             Log.d("NewsViewModel", "Error: $it")
