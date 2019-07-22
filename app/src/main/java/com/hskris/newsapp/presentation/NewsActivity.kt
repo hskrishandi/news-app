@@ -18,8 +18,8 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        recViewFrontNews.layoutManager = LinearLayoutManager(this)
-        recViewFrontNews.adapter = newsCardAdapter
+        rvHeadlines.layoutManager = LinearLayoutManager(this)
+        rvHeadlines.adapter = newsCardAdapter
 
         val frontNewsObserver = Observer<List<News>>{
             newsCardAdapter.updateNews(it)
