@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:orientation="vertical"
-                                                   android:layout_width="wrap_content"
-                                                   android:layout_height="wrap_content" android:padding="16dp">
-
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="240dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:id="@+id/imageViewCarousell"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="centerCrop"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewTitleCarousell"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewCarousell" android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/imageViewCarousell"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewCarousell" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:textSize="24sp" android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff"
+            app:cardCornerRadius="10dp"
+            android:elevation="15dp">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/textViewTitleCarousell"
+                    tools:text="Beautiful House in Malang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp" android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                    android:id="@+id/textViewDescriptionCarousell"
+                    tools:text="Lorep Ipsum dolor sit amet, consectetur..."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

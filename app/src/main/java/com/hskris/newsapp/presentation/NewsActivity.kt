@@ -13,21 +13,31 @@ class NewsActivity : AppCompatActivity() {
 
     private val viewModel: NewsViewModel by inject()
     private val newsCardAdapter = NewsCardAdapter(emptyList())
+    private val carousellAdapter = NewsCarousellAdapter(emptyList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
+        rvLatestNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvLatestNews.adapter = carousellAdapter
+
         rvHeadlines.layoutManager = LinearLayoutManager(this)
         rvHeadlines.adapter = newsCardAdapter
 
-        val frontNewsObserver = Observer<List<News>>{
+        val newsObserver = Observer<List<News>>{
             newsCardAdapter.updateNews(it)
         }
 
-        viewModel.news.observe(this, frontNewsObserver)
+        val carousellObserver = Observer<List<News>>{
+            carousellAdapter.updateNews(it)
+        }
 
-        viewModel.getFrontNews()
+        viewModel.news.observe(this, newsObserver)
+        viewModel.carousell.observe(this, carousellObserver)
+
+        viewModel.getCarousell()
+        viewModel.getNews("general")
 
     }
 }
