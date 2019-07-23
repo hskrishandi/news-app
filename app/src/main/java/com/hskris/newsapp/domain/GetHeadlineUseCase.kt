@@ -18,8 +18,9 @@ class GetHeadlineUseCase(
 
         val result = repo.fetchHeadlines(query)
 
-        return result.subscribeOn(scheduler.io())
-            .map {newsResponse -> News.parseResponseToModel(newsResponse)}
+        return result
+            .map { newsResponse -> News.parseResponseToModel(newsResponse) }
+            .subscribeOn(scheduler.io())
             .observeOn(scheduler.ui())
     }
 
