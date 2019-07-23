@@ -29,8 +29,10 @@ class CategoryFragment(val category: String) : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        rvHeadlines.layoutManager = LinearLayoutManager(context)
-        rvHeadlines.adapter = newsCardAdapter
+        rvHeadlines.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = newsCardAdapter
+        }
 
         val newsObserver = Observer<List<News>>{
             newsCardAdapter.updateNews(it)

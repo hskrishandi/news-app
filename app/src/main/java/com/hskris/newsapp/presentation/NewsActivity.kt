@@ -19,8 +19,10 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        rvLatestNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rvLatestNews.adapter = carousellAdapter
+        rvLatestNews.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = carousellAdapter
+        }
 
         val carousellObserver = Observer<List<News>>{
             carousellAdapter.updateNews(it)
