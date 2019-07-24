@@ -2,7 +2,8 @@ package com.hskris.newsapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -33,6 +34,7 @@ class NewsActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = carousellAdapter
         }
+
         rvHeadlines.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsCardAdapter
@@ -41,13 +43,16 @@ class NewsActivity : AppCompatActivity() {
         val newsObserver = Observer<NewsViewModel.NewsState>{ state ->
             when(state){
                 is NewsViewModel.NewsState.Loading -> {
-                    Log.d("NewsActivity", "Loading data")
+                    rvHeadlines.visibility = View.INVISIBLE
+                    loadingNews.visibility = View.VISIBLE
                 }
                 is NewsViewModel.NewsState.Data -> {
+                    rvHeadlines.visibility = View.VISIBLE
+                    loadingNews.visibility = View.INVISIBLE
                     newsCardAdapter.updateNews(state.news)
                 }
                 is NewsViewModel.NewsState.Error -> {
-                    Log.e("NewsActivity", "Error")
+                    Toast.makeText(this, "Fail to get news", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -58,13 +63,14 @@ class NewsActivity : AppCompatActivity() {
         val carousellObserver = Observer<NewsViewModel.CarousellState>{ state ->
             when(state){
                 is NewsViewModel.CarousellState.Loading -> {
-                    Log.d("NewsActivity", "Loading data")
+                    loadingCarousell.visibility = View.VISIBLE
                 }
                 is NewsViewModel.CarousellState.Data -> {
+                    loadingCarousell.visibility = View.INVISIBLE
                     carousellAdapter.updateNews(state.news)
                 }
                 is NewsViewModel.CarousellState.Error -> {
-                    Log.e("NewsActivity", "Error")
+                    Toast.makeText(this, "Fail to get carousell news", Toast.LENGTH_LONG).show()
                 }
             }
         }
