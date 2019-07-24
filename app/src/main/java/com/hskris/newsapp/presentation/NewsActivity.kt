@@ -30,11 +30,37 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
+        setupLatesNews()
+        setupHeadlines()
+        setupNewsTabs()
+    }
+
+    private fun setupLatesNews() {
         rvLatestNews.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = carousellAdapter
         }
 
+        val carousellObserver = Observer<NewsViewModel.CarousellState>{ state ->
+            when(state){
+                is NewsViewModel.CarousellState.Loading -> {
+                    loadingCarousell.visibility = View.VISIBLE
+                }
+                is NewsViewModel.CarousellState.Data -> {
+                    loadingCarousell.visibility = View.INVISIBLE
+                    carousellAdapter.updateNews(state.news)
+                }
+                is NewsViewModel.CarousellState.Error -> {
+                    Toast.makeText(this, "Fail to get carousell news", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        viewModel.carousellState.observe(this, carousellObserver)
+        viewModel.getCarousell()
+    }
+
+    private fun setupHeadlines() {
         rvHeadlines.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsCardAdapter
@@ -59,27 +85,12 @@ class NewsActivity : AppCompatActivity() {
 
         viewModel.newsState.observe(this, newsObserver)
         viewModel.getNews("general")
+    }
 
-        val carousellObserver = Observer<NewsViewModel.CarousellState>{ state ->
-            when(state){
-                is NewsViewModel.CarousellState.Loading -> {
-                    loadingCarousell.visibility = View.VISIBLE
-                }
-                is NewsViewModel.CarousellState.Data -> {
-                    loadingCarousell.visibility = View.INVISIBLE
-                    carousellAdapter.updateNews(state.news)
-                }
-                is NewsViewModel.CarousellState.Error -> {
-                    Toast.makeText(this, "Fail to get carousell news", Toast.LENGTH_LONG).show()
-                }
-            }
+    private fun setupNewsTabs() {
+        for (category in categories) {
+            tabsNews.addTab(tabsNews.newTab().setText(category))
         }
-
-
-        viewModel.carousellState.observe(this, carousellObserver)
-        viewModel.getCarousell()
-
-        setupTabs()
 
         tabsNews.tabMode = TabLayout.MODE_SCROLLABLE
         tabsNews.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
@@ -94,11 +105,5 @@ class NewsActivity : AppCompatActivity() {
             }
 
         })
-    }
-
-    private fun setupTabs() {
-        for (category in categories) {
-            tabsNews.addTab(tabsNews.newTab().setText(category))
-        }
     }
 }
