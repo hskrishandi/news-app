@@ -14,11 +14,11 @@ val appModule = module {
 
     single<NewsRepository> { NewsRemoteRepository(Api.getInstance()) }
 
-    factory<BaseSchedulerProvider> { SchedulerProvider() }
+    single<BaseSchedulerProvider> { SchedulerProvider() }
 
-    factory { GetEverythingUseCase(get(), get()) }
-    factory { GetHeadlineUseCase(get(), get()) }
+    single { GetEverythingUseCase(get(), get()) }
+    single { GetHeadlineUseCase(get(), get()) }
 
-    factory { NewsViewModel(get(), get()) }
+    single { NewsViewModel(get(), get()) }
 
 }
