@@ -13,32 +13,39 @@ class NewsViewModel(
     private val getEverythingUseCase: GetEverythingUseCase
 ) : ViewModel() {
 
+    companion object {
+        private const val INTERESTS = "football"
+    }
+
     private val disposables = CompositeDisposable()
 
-    val carousell by lazy {
-        MutableLiveData<List<News>>()
+    val newsState by lazy {
+        MutableLiveData<NewsState>()
     }
 
-    val news by lazy {
-        MutableLiveData<List<News>>()
+    val carousellState by lazy {
+        MutableLiveData<CarousellState>()
     }
-
-    val interests = "football"
 
     fun getNews(category: String){
+        newsState.value = NewsState.Loading
         val subscription = getHeadlineUseCase.getByCategory(category).subscribe({
-            news.value = it
+            Log.d("NewsVideoModel", it.toString())
+            newsState.value = NewsState.Data(it)
         }, {
-            Log.d("NewsViewModel", "Error: $it")
+            newsState.value = NewsState.Error
+            Log.e("NewsViewModel", "Error: $it")
         })
+        disposables.add(subscription)
     }
 
     fun getCarousell(){
-        val subscription = getEverythingUseCase.getByKeywords(interests).subscribe({
-            carousell.value = it
-            Log.d("NewsViewModel", it.toString())
+        carousellState.value = CarousellState.Loading
+        val subscription = getEverythingUseCase.getByKeywords(INTERESTS).subscribe({
+            carousellState.value = CarousellState.Data(it)
         },{
-            Log.d("NewsViewModel", "Error: $it")
+            carousellState.value = CarousellState.Error
+            Log.e("NewsViewModel", "Error: $it")
         })
 
         disposables.add(subscription)
@@ -49,4 +56,15 @@ class NewsViewModel(
         disposables.clear()
     }
 
+    sealed class CarousellState {
+        object Loading : CarousellState()
+        data class Data(val news: List<News>) : CarousellState()
+        object Error : CarousellState()
+    }
+
+    sealed class NewsState {
+        object Loading : NewsState()
+        data class Data(val news: List<News>) : NewsState()
+        object Error : NewsState()
+    }
 }
