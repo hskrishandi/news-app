@@ -6,46 +6,46 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="@dimen/padding_normal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="@dimen/newscard_layout_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/cardViewNews">
         <ImageView
-                android:layout_height="120dp"
+                android:layout_height="@dimen/newscard_img_height"
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/imageViewCard"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/newscard_img_width"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:scaleType="centerCrop"/>
         <TextView
                 tools:text="Top 10 Anime Betrayals"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewTitleCard"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_medium"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCard"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="@dimen/margin_normal"/>
         <TextView
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing eli."
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDescCard"
                 app:layout_constraintStart_toStartOf="@+id/textViewTitleCard"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitleCard"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_small"
                 app:layout_constraintEnd_toEndOf="@+id/textViewTitleCard"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/text_normal"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

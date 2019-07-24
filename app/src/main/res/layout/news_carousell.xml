@@ -5,13 +5,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:layout_height="@dimen/carousell_layout_height"
+        android:paddingTop="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal">
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/carousell_img_height"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:id="@+id/imageViewCarousell"
             app:layout_constraintStart_toStartOf="parent"
@@ -20,32 +20,33 @@
             android:scaleType="centerCrop"/>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#ffffff"
-            app:cardCornerRadius="10dp"
-            android:elevation="15dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            android:elevation="@dimen/shadow">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="@dimen/padding_normal"
                 android:orientation="vertical">
             <TextView
                     android:id="@+id/textViewTitleCarousell"
                     tools:text="Beautiful House in Malang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp" android:textStyle="bold"
+                    android:textSize="@dimen/text_large"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
                     android:id="@+id/textViewDescriptionCarousell"
                     tools:text="Lorep Ipsum dolor sit amet, consectetur..."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_normal"
                     app:layout_constraintBottom_toBottomOf="parent"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
